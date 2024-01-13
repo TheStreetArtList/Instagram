@@ -327,6 +327,8 @@
       body.menu-open #archive-list,
       body.menu-open #social-links,
       body.menu-open #signup-text, 
+      body.menu-open #tip,
+      body.menu-open footer,
       body.menu-open .logo-container {
         display: none; /* Hide when the menu is open */
       }
@@ -334,9 +336,12 @@
       body:not(.menu-open) #archive-list,
       body:not(.menu-open) #social-links,
       body:not(.menu-open) #signup-text,
+      body:not(.menu-open) #tip,
+      body:not(.menu-open) footer,
       body:not(.menu-open) .logo-container{
         display: block; /* Show when the menu is closed */
       }
+	    
       .menu-links img {
       display: flex;
       justify-content: center;
@@ -389,7 +394,7 @@
 		<li><a href="https://drive.google.com/file/d/1pKXrdieC3qsiengyxzdnaUnpSmZoqtTi/view?usp=sharing">Art X Ter</a> - (Deadline: Jan 30th)</li>
 		
         </ol>
-	<div>
+	<div id="tip">
            <hr id="divider-line">
     	<p id="CTA-maintext">If you find these links (and the other things that I do) useful, maybe you'll like my monthly newsletter 😊 </p>
 		<a class="button-link" href="https://eepurl.com/iErSXY" target="_blank">
