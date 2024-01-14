@@ -73,7 +73,7 @@
     }
     
         #signup-maintext {
-      margin: 20px auto 0px;
+      margin: 60px auto 0px;
       max-width: 75%; /*commented out as it's not currently necessary*/
       font-weight: 700;
       font-size: larger;
@@ -402,7 +402,26 @@
       </a>
 	<p id="CTA-subtext">...And if you've already done that and find all of this useful, consider tipping? You can do that <a href="buymeacoffee.com/thestreetartlist"><b>here</b></a> if so!</p>
     </div>
+    <div id="social-links" class="social-icons">
+      <a href="https://www.instagram.com/thestreetartlist" target="_blank">
+        <img src="https://cdn-images.mailchimp.com/icons/social-block-v3/block-icons-v3/instagram-filled-dark-40.png" alt="IG Icon">
+      </a>
+      <a href="https://www.threads.net/thestreetartlist" target="_blank">
+        <img src="https://cdn-images.mailchimp.com/icons/social-block-v3/block-icons-v3/threads-filled-dark-40.png" alt="Threads Icon">      
+      </a>
+      <a href="mailto:streetartlist@theanthonybrooks.com" target="_blank">
+        <img src="https://cdn-images.mailchimp.com/icons/social-block-v3/block-icons-v3/email-filled-dark-40.png" alt="Email Icon">
+      </a>
+        <a href="https://bit.ly/bmacnlsignup" target="_blank">
+        <img src="https://mcusercontent.com/fa6b0c41fcaaf67cc94a80740/images/a534d31d-7c3a-e162-0d2f-9f3625cc6afe.png" alt="Tip Icon">      
+      </a>
 
+    </div>
+
+
+
+
+	  
     <div class="menu-links" id="menu-links">
     <h3>Menu</h3>
       <a href="https://bit.ly/streetartfests" target="_blank">1. The List</a>
@@ -432,14 +451,42 @@
 
 
 
-  <script>
-    function toggleMenu() {
-      console.log("Toggle menu function executed");
-      var menuIcon = document.querySelector('.menu-icon');
-      menuIcon.classList.toggle('active');
-      document.body.classList.toggle('menu-open');
-    }
+<script>
+  function toggleMenu() {
+    var menuIcon = document.querySelector('.menu-icon');
+    menuIcon.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
 
-  </script>
+    var menuLinks = document.getElementById('menu-links');
+    var socialLinks = document.getElementById('social-links').innerHTML;
+
+    if (document.body.classList.contains('menu-open')) {
+      // Apply styles to text links
+      document.querySelectorAll('.menu-links .text-link').forEach(link => {
+        link.style.display = 'block';
+        link.style.fontSize = '2em';
+        link.style.fontWeight = '800';
+        link.style.lineHeight = '3.0';
+        link.style.color = '#000';
+        link.style.textDecoration = 'none';
+      });
+
+      // Apply styles to social media icons
+      document.querySelectorAll('.menu-links .social-icon').forEach(icon => {
+        icon.style.width = '50px';
+        icon.style.height = '50px';
+        icon.style.borderRadius = '50%';
+        icon.style.transition = 'transform 0.3s ease-in-out';
+      });
+    } else {
+      // If menu is closed, remove social links from menu-links div
+      document.querySelectorAll('.menu-links .social-icon').forEach(icon => {
+        icon.remove();
+      });
+            // Remove the class indicating social links have been added
+      menuLinks.classList.remove('social-links-added');
+    }
+  }
+</script>
 </body>
 </html>
