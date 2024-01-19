@@ -9,7 +9,7 @@
   <link rel="icon" href="https://mcusercontent.com/fa6b0c41fcaaf67cc94a80740/images/0da4c742-83c6-fa72-a130-825f6d9db3d9.png" type="image/png">
 
  
-<style type="text/css">
+ <style type="text/css">
      nav {
       background-color: rgba(0, 0, 0, 0); /* Transparent background */
       padding: 15px;
@@ -26,9 +26,12 @@
       margin: 0 15px;
       }
       
-	.menu-links {
-    display: none;
+    .menu-links {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out; /* Adjust the duration and easing as needed */
     }
+
       
    .logo-container {
       position: absolute;
@@ -74,7 +77,7 @@
     }
     
         #signup-maintext {
-      margin: 60px auto 0px;
+      margin: 20px auto 0px;
       max-width: 75%; /*commented out as it's not currently necessary*/
       font-weight: 700;
       font-size: larger;
@@ -97,8 +100,8 @@
       font-size: medium;
       text-align: center;
     }
-	    #CTA-subtext {
-      margin: 20px auto 50px;
+      #info-submission {
+      margin: 20px auto 0px;
       max-width: 60%; /*commented out as it's not currently necessary*/
       font-weight: 700;
       font-size: medium;
@@ -139,14 +142,7 @@
         margin: 30px auto;
         justify-content: center;
         text-align: center;
-	max-width: 90%;
     }
-	
-	.footer {
-        font-size: 10px;
-	margin: 30px auto;
-    }
-	
     
     #social-links {
       text-align: center;
@@ -154,9 +150,9 @@
     
    #archive-list {
      margin: 3em;
-     /* list-style: square; */
+     list-style: square;
      line-height: 2.2em;
-     margin-inline-start: 1.1em;
+     margin-inline-start: 0;
    }
 
     .social-icons {
@@ -187,7 +183,7 @@
       transform: scale(1.2); /* Scale up on hover */
     }
         #cta-button {
-    width: auto;
+    width: 16em;
       display: flex;
       margin: 40px auto 60px;
       padding: 10px 30px;
@@ -204,7 +200,7 @@
     }
     
         #cta-button:hover {
-    	box-shadow: 0px 0px 0px #000; /*smaller shadow on hover*/
+    	box-shadow: -3px 3px 0px #000; /*smaller shadow on hover*/
         background-color: #000000; /* black color on hover*/
       	color: #fcef55; /* font color*/
     	border: 2px solid #fcef55; /* yellow border*/
@@ -223,6 +219,9 @@
    	input {
       width: 50%;
       }
+              #info-submission {
+      max-width: 40%; /*commented out as it's not currently necessary*/
+    }
   }
   
       /* Adjust the button width for HD screens */
@@ -234,6 +233,9 @@
    	input {
       width: 50%;
       }
+              #info-submission {
+      max-width: 40%; /*commented out as it's not currently necessary*/
+    }
   }
       /* Adjust the button width for normal screens */
 	@media screen and (max-width: 1700px) {
@@ -242,8 +244,11 @@
     /*margin-top: 1em;*/
     }
     input {
-        width: 50%;
+        width: 60%;
       }
+              #info-submission {
+      max-width: 40%; /*commented out as it's not currently necessary*/
+    }
   }
     /* Adjust the button width for smaller screens */
 	@media screen and (max-width: 600px) {
@@ -258,6 +263,47 @@
 }
 
     /* Hamburger menu styles */
+   .ham {
+      cursor: pointer;
+      display: none; /*hide by default on larger screens */
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      z-index: 2;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 400ms;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    
+      .hamRotate.active {
+        transform: rotate(45deg);
+      }
+      .hamRotate180.active {
+        transform: rotate(180deg);
+      }
+      .line {
+        fill:none;
+        transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+        stroke:#000;
+        stroke-width:5.5;
+        stroke-linecap:round;
+      }
+      .ham1 .top {
+        stroke-dasharray: 40 139;
+      }
+      .ham1 .bottom {
+        stroke-dasharray: 40 180;
+      }
+      .ham1.active .top {
+        stroke-dashoffset: -98px;
+      }
+      .ham1.active .bottom {
+        stroke-dashoffset: -138px;
+      }
+    
     .menu-icon {
       display: none; /* Hide by default on larger screens */
       cursor: pointer;
@@ -266,7 +312,6 @@
       right: 30px;
       z-index: 2;
     }
-
     .menu-icon div {
       width: 30px;
       height: 3px;
@@ -279,9 +324,11 @@
       nav a {
         display: none; /*Hide navigation links by default on smaller screens */
       }
-
+	.ham {
+    	display: block;
+      }
       .menu-icon {
-        display: block; /* Show the hamburger icon on smaller screens */
+        display: none; /* Show the hamburger icon on smaller screens */
       }
 
       .menu-icon.active div:nth-child(1) {
@@ -306,11 +353,13 @@
         top: 44%;
         left: 50%;
         transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease-in-out; /*add this line for a smooth fade in-out effect*/
   	  }	
       
       body.menu-open .menu-links a {
         display: block;
         text-indent: 20px; /*adjust prn*/
+        opacity: 1; /*show the menu-links with opacity transition*/
    	 }
       
       body.menu-open nav a,
@@ -329,20 +378,25 @@
       body.menu-open #social-links,
       body.menu-open #signup-text, 
       body.menu-open #tip,
+      body.menu-open #info-submission,
       body.menu-open footer,
       body.menu-open .logo-container {
         display: none; /* Hide when the menu is open */
+        transition: opacity 0.3s ease-in-out; /*add this line for a smooth fade in-out effect*/
+
       }
 
       body:not(.menu-open) #archive-list,
       body:not(.menu-open) #social-links,
       body:not(.menu-open) #signup-text,
       body:not(.menu-open) #tip,
+      body:not(.menu-open) #info-submission,
       body:not(.menu-open) footer,
       body:not(.menu-open) .logo-container{
         display: block; /* Show when the menu is closed */
+        transition: opacity 0.3s ease-in-out; /*add this line for a smooth fade in-out effect*/
+
       }
-	    
       .menu-links img {
       display: flex;
       justify-content: center;
@@ -361,6 +415,9 @@
     text-align: center;
     margin-bottom: 3rem;
     }
+        #info-submission {
+      max-width: 90%; /*commented out as it's not currently necessary*/
+    }
     }
   </style>
 </head>
@@ -374,6 +431,17 @@
   <div class="logo-container">
     <img src="https://mcusercontent.com/fa6b0c41fcaaf67cc94a80740/images/0da4c742-83c6-fa72-a130-825f6d9db3d9.png" alt="SAL Logo">
   </div>
+    <svg class="ham hamRotate ham1" viewBox="0 0 100 100" width="70" onclick="toggleMenu(); this.classList.toggle('active')">
+  <path
+        class="line top"
+        d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40" />
+  <path
+        class="line middle"
+        d="m 30,50 h 40" />
+  <path
+        class="line bottom"
+        d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40" />
+</svg>
   <div class="menu-icon" onclick="toggleMenu()">
     <div></div>
     <div></div>
