@@ -529,41 +529,50 @@
 
 
 <script>
-  function toggleMenu() {
-    var menuIcon = document.querySelector('.menu-icon');
-    menuIcon.classList.toggle('active');
-    document.body.classList.toggle('menu-open');
+function toggleMenu() {
+  var menuIcon = document.querySelector('.menu-icon');
+  menuIcon.classList.toggle('active');
+  document.body.classList.toggle('menu-open');
 
-    var menuLinks = document.getElementById('menu-links');
-    var socialLinks = document.getElementById('social-links').innerHTML;
+  var menuLinks = document.getElementById('menu-links');
 
-    if (document.body.classList.contains('menu-open')) {
-      // Apply styles to text links
-      document.querySelectorAll('.menu-links .text-link').forEach(link => {
-        link.style.display = 'block';
-        link.style.fontSize = '2em';
-        link.style.fontWeight = '800';
-        link.style.lineHeight = '3.0';
-        link.style.color = '#000';
-        link.style.textDecoration = 'none';
-      });
+  if (document.body.classList.contains('menu-open')) {
+    // Apply styles to text links
+    document.querySelectorAll('.menu-links .text-link').forEach(link => {
+      link.style.display = 'block';
+      link.style.fontSize = '2em';
+      link.style.fontWeight = '800';
+      link.style.lineHeight = '3.0';
+      link.style.color = '#000';
+      link.style.textDecoration = 'none';
+    });
 
-      // Apply styles to social media icons
-      document.querySelectorAll('.menu-links .social-icon').forEach(icon => {
-        icon.style.width = '50px';
-        icon.style.height = '50px';
-        icon.style.borderRadius = '50%';
-        icon.style.transition = 'transform 0.3s ease-in-out';
-      });
-    } else {
-      // If menu is closed, remove social links from menu-links div
-      document.querySelectorAll('.menu-links .social-icon').forEach(icon => {
-        icon.remove();
-      });
-            // Remove the class indicating social links have been added
-      menuLinks.classList.remove('social-links-added');
-    }
+    // Set transition property for fade in
+    menuLinks.style.transition = 'opacity 0.3s ease-in-out';
+    // Set opacity to 1 to fade in
+    menuLinks.style.opacity = 1;
+    // Set display to block after the transition starts
+    menuLinks.style.display = 'block';
+  } else {
+    // If menu is closed, remove social links from menu-links div
+    document.querySelectorAll('.menu-links .social-icon').forEach(icon => {
+      icon.remove();
+    });
+    // Remove the class indicating social links have been added
+    menuLinks.classList.remove('social-links-added');
+
+    // Set transition property for fade out
+    menuLinks.style.transition = 'opacity 0.3s ease-in-out';
+    // Set opacity to 0 to fade out
+    menuLinks.style.opacity = 0;
+    // Set display to none after the transition ends
+    setTimeout(() => {
+      menuLinks.style.display = 'none';
+    }, 300); // 300 milliseconds is the duration of your transition
   }
+}
+
+
 </script>
 </body>
 </html>
